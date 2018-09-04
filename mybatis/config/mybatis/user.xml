@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+
+    <select id="getUserById" parameterType="int" resultType="User">
+       SELECT
+          `id`,
+          `username`,
+          `birthday`,
+          `sex`,
+          `address`
+        FROM `user`
+        WHERE id= #{id}
+    </select>
+
+    <select id="getUserByName" parameterType="string" resultType="User">
+        SELECT
+        `id`,
+        `username`,
+        `birthday`,
+        `sex`,
+        `address`
+        FROM `user`
+--         //  模糊查询
+        WHERE  username like  '%${value}%'
+    </select>
+
+    <insert id="insertUser" parameterType="User">
+        INSERT INTO USER (
+         `username`,
+         `birthday`,
+		  `sex`,
+		  `address`
+        ) VALUES (
+            #{username},
+            #{birthday},
+            #{sex},
+            #{address});
+    </insert>
+</mapper>
